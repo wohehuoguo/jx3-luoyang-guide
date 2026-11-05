@@ -79,7 +79,7 @@
 .member-opening .opening-map svg{max-height:340px}
 .member-heading{margin-bottom:13px}
 .member-heading>h3{font-size:19px}
-.member-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.member-skills{display:grid;grid-template-columns:1fr;gap:14px}
 .member-skill{min-width:0;border:1px solid #dce3d3;border-radius:6px;background:var(--white);overflow:hidden}
 .member-skill.critical{border-left:3px solid #b68b58}
 .member-skill>header{display:flex;align-items:baseline;gap:9px;padding:16px 17px 0}
@@ -87,13 +87,14 @@
 .member-skill h3{font-size:14px;font-weight:600;line-height:1.6;margin:0;color:#354d3c;letter-spacing:0}
 .member-skill .phase{margin-left:auto;flex-shrink:0;font-size:9px;color:#859076}
 .member-action{margin:8px 17px 11px;font-size:14px;line-height:1.85;color:#445345}
-.member-demo>summary{list-style:none;font-size:11px;color:#6a8058;cursor:pointer;padding:0 17px 13px;width:fit-content}
-.member-demo>summary::-webkit-details-marker{display:none}
-.member-demo[open]>summary{padding-bottom:11px}
-.member-demo[open]>summary span{display:none}
-.member-skill:has(.member-demo[open]){grid-column:1/-1}
-.member-demo-body .skill-figure{border-left:0;border-top:1px solid #e3e8dc;padding:16px 20px;background:#f8f9f3}
-.member-demo-body:empty,.member-fight-body:empty{display:none}
+.member-visual{margin:0;padding:12px 18px 16px;border-top:1px solid #e3e8dc;background:#f8f9f3}
+.member-visual-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;font-size:10px;line-height:1.7;color:#728267}
+.member-visual-tools .expand-diagram{font-size:10px;padding:3px 7px;white-space:nowrap}
+.member-visual .mechanism-demo .mdemo-steps,.member-visual .mechanism-demo .mdemo-note,.member-visual .mechanism-demo .mdemo-timing,.member-visual .mechanism-demo [data-demo-explain]{display:none}
+.member-visual .mechanism-demo .mdemo-status{min-height:0;padding:10px 12px;margin:10px 0}
+.member-visual .mechanism-demo .mdemo-stage strong{font-size:13px}
+.member-visual .mechanism-demo .mdemo-controls{margin-bottom:0}
+.member-fight-body:empty{display:none}
 .member-fight{margin:22px 0 0;border:1px solid #cfd9c5;border-radius:6px;background:#edf1e7;scroll-margin-top:150px;overflow:hidden}
 .member-fight>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;cursor:pointer;color:#49644a;list-style:none}
 .member-fight>summary::-webkit-details-marker{display:none}
@@ -105,7 +106,8 @@
 .member-full-link{margin-top:17px;text-align:right}
 .member-full-link button{border:0;background:none;padding:5px 0;color:#78886b;font-size:11px}
 @media(max-width:980px){.member-skills{grid-template-columns:1fr}.member-skill>header{padding-top:14px}.member-action{font-size:13px}}
-@media(max-width:760px){.reading-mode{gap:10px;margin-bottom:13px}.reading-mode>span{font-size:10px}.reading-options{flex:1;max-width:260px}.reading-options button{flex:1;padding:7px 10px;font-size:12px}.member-mode .role-toolbar{gap:6px}.member-mode .fight-jump{font-size:10px}.member-start{padding:13px 14px;margin-bottom:20px}.member-start dl>div{gap:10px}.member-start dd{font-size:12px;line-height:1.85}.member-skills{gap:10px}.member-skill>header{padding:12px 14px 0;gap:8px}.member-skill h3{font-size:14px}.member-action{margin:7px 14px 9px;font-size:13px}.member-demo>summary{padding:0 14px 12px}.member-demo-body .skill-figure{padding:12px}.member-full-link{text-align:left}.member-full-link button{font-size:11px;line-height:1.8}.member-fight>summary{padding:14px}.member-fight{scroll-margin-top:140px}.member-opening .opening-map{padding:12px 8px}}
+@media(min-width:1101px){.member-visual .mechanism-demo{grid-template-rows:auto auto 1fr}.member-visual .mechanism-demo .mdemo-status{margin:0}.member-visual .mechanism-demo .mdemo-controls{align-self:start}}
+@media(max-width:760px){.reading-mode{gap:10px;margin-bottom:13px}.reading-mode>span{font-size:10px}.reading-options{flex:1;max-width:260px}.reading-options button{flex:1;padding:7px 10px;font-size:12px}.member-mode .role-toolbar{gap:6px}.member-mode .fight-jump{font-size:10px}.member-start{padding:13px 14px;margin-bottom:20px}.member-start dl>div{gap:10px}.member-start dd{font-size:12px;line-height:1.85}.member-skills{gap:10px}.member-skill>header{padding:12px 14px 0;gap:8px}.member-skill h3{font-size:14px}.member-action{margin:7px 14px 9px;font-size:13px}.member-visual{padding:10px 12px 13px}.member-visual-tools{font-size:9px}.member-full-link{text-align:left}.member-full-link button{font-size:11px;line-height:1.8}.member-fight>summary{padding:14px}.member-fight{scroll-margin-top:140px}.member-opening .opening-map{padding:12px 8px}}
 
 /* Isolated mechanism demo styles; the surrounding skill-figure stays in charge. */
 .mechanism-demo{min-width:0;width:100%;color:#2f4541;font-size:13px;line-height:1.65}
@@ -707,7 +709,9 @@ function readingModeHTML(){return `<div class="reading-mode" role="group" aria-l
 function memberOpeningHTML(b){const m=b.memberBrief;return `<section class="member-start" aria-label="${escapeHTML(b.name)}团员开打提醒"><dl><div><dt>站位</dt><dd>${escapeHTML(m.opening)}</dd></div><div><dt>流程</dt><dd>${escapeHTML(m.flow)}</dd></div></dl><details class="member-opening"><summary>看开场站位图</summary><figure class="opening-map"><div class="opening-map-title"><span>${escapeHTML(b.setup.map.title)}</span><button class="expand-diagram" data-diagram="${b.id}|__opening__" aria-label="放大${escapeHTML(b.name)}开场站位图">放大 ↗</button></div>${b.setup.map.svg}</figure></details></section>`}
 function memberSkillHTML(b,s,i,role='all'){
  const brief=b.memberBrief.skills[s.name];const action=brief.roles?.[role]||brief.action;
- return `<article class="member-skill ${s.critical?'critical':''}" data-skill="${escapeHTML(s.name)}"><header><span class="member-number">${String(i+1).padStart(2,'0')}</span><h3>${escapeHTML(s.name)}</h3><span class="phase">${escapeHTML(s.phase)}</span></header><p class="member-action">${escapeHTML(action)}</p><details class="member-demo" data-member-skill="${i}" data-member-boss="${b.id}"><summary>看动图<span aria-hidden="true"> ＋</span></summary><div class="member-demo-body"></div></details></article>`;
+ const info=mechanismDemoInfo(s);
+ const labels=[info?.viewLabel,info?.targeting?.label].filter(Boolean);
+ return `<article class="member-skill ${s.critical?'critical':''}" data-skill="${escapeHTML(s.name)}"><header><span class="member-number">${String(i+1).padStart(2,'0')}</span><h3>${escapeHTML(s.name)}</h3><span class="phase">${escapeHTML(s.phase)}</span></header><p class="member-action">${escapeHTML(action)}</p><figure class="member-visual" aria-label="${escapeHTML(s.name)}处理动图"><div class="member-visual-tools"><span>${labels.map(escapeHTML).join(' · ')}</span><button class="expand-diagram" data-diagram="${escapeHTML(b.id+'|'+s.name)}" aria-label="放大${escapeHTML(s.name)}示意图">放大讲解 ↗</button></div>${mechanismDemoHTML(s,`member-${b.id}-${i}-${role}`)}</figure></article>`;
 }
 function memberBossHTML(b,filtered){return memberOpeningHTML(b)+`<div class="mechanics-heading member-heading" id="skill-area"><h3>${roleNames[state.role]} · 记住这些 <small>${filtered.length}项</small></h3></div><div class="member-skills">${filtered.map(s=>memberSkillHTML(b,s,b.skills.indexOf(s),state.role)).join('')||'<div class="empty">该职责暂无需主动处理的机制。</div>'}</div><details class="member-fight" id="member-fight-${b.id}" data-member-fight="${b.id}"><summary><b>看整场演示</b><span>开怪 → 击败</span></summary><div class="member-fight-body"></div></details><div class="member-full-link"><button type="button" data-reading-mode="full">查看完整攻略：分组 · 技能轴 · 详细机制 →</button></div>`}
 function bindDiagramButtons(root){root.querySelectorAll('[data-diagram]').forEach(el=>el.addEventListener('click',()=>openDiagram(el.dataset.diagram)))}
@@ -717,12 +721,7 @@ function mountMemberFight(details){
  container.innerHTML=fullFightHTML(b).replace('计时预报见上方“正式服技能轴”。','实战秒轴请切换完整版查看。');
  mountFightDemos(container);
 }
-function bindMemberDemos(root){
- root.querySelectorAll('[data-member-skill]').forEach(details=>details.addEventListener('toggle',()=>{
-  const container=details.querySelector('.member-demo-body');
-  if(details.open){if(container.children.length)return;const b=bosses.find(x=>x.id===details.dataset.memberBoss);const i=Number(details.dataset.memberSkill);container.innerHTML=skillFigure(b.skills[i],`member-${b.id}-${i}-${state.role}`);bindDiagramButtons(container);mountMechanismDemos(container);}
-  else{disposeMechanismDemos(container);container.innerHTML='';}
- }));
+function bindMemberFights(root){
  root.querySelectorAll('[data-member-fight]').forEach(details=>details.addEventListener('toggle',()=>{
   if(details.open)mountMemberFight(details);else{const container=details.querySelector('.member-fight-body');disposeFightDemos(container);container.innerHTML='';}
  }));
@@ -776,7 +775,7 @@ function render(){
  view.querySelector('[data-axis-jump]')?.addEventListener('click',e=>{e.preventDefault();const axis=view.querySelector('.combat-axis');if(axis){axis.open=true;axis.scrollIntoView({behavior:'smooth',block:'start'});}});
  view.querySelector('[data-fight-jump]')?.addEventListener('click',e=>{e.preventDefault();const folded=view.querySelector('[data-member-fight]');if(folded){folded.open=true;mountMemberFight(folded)}view.querySelector('.full-fight')?.scrollIntoView({behavior:'smooth',block:'start'});});
  view.querySelector('[data-top]')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
- bindDiagramButtons(view);bindMemberDemos(view);
+ bindDiagramButtons(view);bindMemberFights(view);
  $('#red')?.addEventListener('input',updateCalc);$('#blue')?.addEventListener('input',updateCalc);updateCalc();
  mountMechanismDemos(view);
  mountFightDemos(view);
